@@ -1,0 +1,27 @@
+########### These MUST be filled in for a storm configuration
+storm.zookeeper.servers:
+    - "dbus-n1"
+    - "dbus-n2"
+    - "dbus-n3"
+
+# zookeeper port
+storm.zookeeper.port: 2181
+storm.zookeeper.root: '/storm'
+
+# Nimbus HA
+nimbus.seeds: ["dbus-n1", "dbus-n2"]
+storm.local.dir: "/data/storm-data"
+# 以dbus-n1为例
+storm.local.hostname: "dbus-n1"
+
+ui.port: 8080
+
+supervisor.slots.ports:
+    - 6708
+    - 6709
+    - 6710
+    - 6711
+    - 6712
+
+#worker.childopts: "-Xms512m -Xmx2048m"
+worker.childopts: "-Dworker=worker -Xms1024m -Xmx2048m -Xmn768m -XX:SurvivorRatio=4 -XX:+UseConcMarkSweepGC  -XX:CMSInitiatingOccupancyFraction=60  -XX:CMSFullGCsBeforeCompaction=2 -XX:+UseCMSCompactAtFullCollection -XX:+PrintGCDetails -XX:+PrintHeapAtGC -XX:+PrintGCApplicationStoppedTime -Xloggc:/home/app/gc.log"
